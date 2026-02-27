@@ -1,13 +1,15 @@
-.PHONY: help docker-up docker-down db-up db-down migrate-up migrate-down backend frontend clean
+.PHONY: help docker-up docker-down db-up db-down migrate-up migrate-down backend frontend clean docker-build docker-run
 
 # Default target
 help:
 	@echo "Task Manager - Available Commands:"
 	@echo ""
 	@echo "Docker:"
-	@echo "  make docker-up        Start all services (db, redis)"
+	@echo "  make docker-up        Start all services (db, redis, backend, frontend)"
 	@echo "  make docker-down      Stop all services"
 	@echo "  make docker-logs      View logs"
+	@echo "  make docker-build     Build all Docker images"
+	@echo "  make docker-restart   Restart all services"
 	@echo ""
 	@echo "Database:"
 	@echo "  make db-up            Start database (PostgreSQL + Redis)"
@@ -27,7 +29,9 @@ help:
 docker-up:
 	docker-compose up -d
 	@echo "✅ All services started"
-	@echo "📊 PostgreSQL: localhost:5433"
+	@echo "📊 Backend: http://localhost:8081"
+	@echo "🌐 Frontend: http://localhost:3000"
+	@echo "🗄️ PostgreSQL: localhost:5433"
 	@echo "🔴 Redis: localhost:6380"
 
 docker-down:
@@ -36,6 +40,14 @@ docker-down:
 
 docker-logs:
 	docker-compose logs -f
+
+docker-build:
+	docker-compose build
+	@echo "✅ All Docker images built"
+
+docker-restart:
+	docker-compose restart
+	@echo "✅ All services restarted"
 
 # Database commands
 db-up:
