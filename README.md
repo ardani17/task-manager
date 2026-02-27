@@ -39,32 +39,38 @@ A modern, full-stack web application for monitoring developer team progress with
 - Docker & Docker Compose
 - Git
 
-### 5-Minute Setup
+### Option 1: Docker (Recommended)
 
 ```bash
 # 1. Clone repository
 git clone https://github.com/ardani17/task-manager.git
 cd task-manager
 
-# 2. Setup environment
-cp .env.example .env
+# 2. Start all services
+docker-compose up -d
 
-# 3. Start database services
-make db-up
-
-# 4. Run migrations
+# 3. Run migrations
 make migrate-up
-
-# 5. Start backend (Terminal 1)
-cd backend && go run cmd/server/main.go
-
-# 6. Start frontend (Terminal 2)
-cd frontend && npm install && npm run dev
+# Or on Windows: .\start.ps1 migrate-up
 ```
 
 **Access:** http://localhost:3000
 
-**📚 Detailed guide:** [INSTALLATION.md](INSTALLATION.md)
+### Option 2: Manual (Without Docker)
+
+See [QUICKSTART_MANUAL.md](QUICKSTART_MANUAL.md) for complete guide.
+
+```bash
+# 1. Install PostgreSQL + Redis + Go + Node.js
+# 2. Create database
+# 3. Run migrations
+# 4. Start backend & frontend
+```
+
+**📚 Detailed guides:**
+- Docker: [DOCKER.md](DOCKER.md)
+- Manual: [MANUAL.md](MANUAL.md)
+- Windows: [WINDOWS.md](WINDOWS.md)
 
 ---
 
